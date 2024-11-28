@@ -14,4 +14,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestAssignmentLunaEdge.Core\TestAssignmentLunaEdge.Core.csproj" />
+    <ProjectReference Include="..\TestAssignmentLunaEdge.DataAccess\TestAssignmentLunaEdge.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

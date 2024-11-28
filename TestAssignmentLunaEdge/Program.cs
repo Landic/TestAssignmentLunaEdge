@@ -1,4 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using System;
+using TestAssignmentLunaEdge.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySQL(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
+
 
 // Add services to the container.
 
