@@ -1,0 +1,6 @@
+@TestAssignmentLunaEdge_HostAddress = http://localhost:5087
+
+GET {{TestAssignmentLunaEdge_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
