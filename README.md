@@ -18,8 +18,7 @@ Before you begin, ensure you have the following tools installed:
 
 Start by cloning the repository to your local machine:
 
-git clone [https://github.com/Landic/TestAssignmentLunaEdge.git]
-cd your-repository-name
+git clone https://github.com/Landic/TestAssignmentLunaEdge.git
 
 ### 2. Set Up the Database
 
