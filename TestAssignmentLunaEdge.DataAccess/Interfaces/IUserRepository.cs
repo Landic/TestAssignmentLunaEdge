@@ -9,8 +9,8 @@ namespace TestAssignmentLunaEdge.DataAccess.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User?> AddUserAsync(User user);
-        Task<User?> GetUserByEmailAsync(string email);
-        Task<User?> GetUserByIdAsync(Guid Id);
+        Task<User> GetByIdAsync(Guid id);
+        Task<User> GetByUsernameOrEmailAsync(string usernameOrEmail);
+        Task AddAsync(User user);
     }
 }

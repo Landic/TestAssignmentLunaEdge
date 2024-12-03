@@ -9,10 +9,10 @@ namespace TestAssignmentLunaEdge.DataAccess.Interfaces
 {
     public interface ITaskRepository
     {
-        Task<TaskModel?> AddTaskAsync(TaskModel task);
+        Task<TaskModel> GetByIdAsync(Guid id);
         Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(Guid userId);
-        Task<TaskModel?> GetTaskByIdAsync(Guid id);
-        Task UpdateTaskAsync(TaskModel task);
-        Task DeleteTaskAsync(Guid id);
+        Task AddAsync(TaskModel task);
+        Task UpdateAsync(TaskModel task);
+        Task DeleteAsync(Guid id);
     }
 }

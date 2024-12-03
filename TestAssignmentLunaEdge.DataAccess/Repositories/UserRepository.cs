@@ -9,30 +9,39 @@ using TestAssignmentLunaEdge.DataAccess.Models;
 
 namespace TestAssignmentLunaEdge.DataAccess.Repositories
 {
+    // The UserRepository class implements IUserRepository interface
     public class UserRepository : IUserRepository
     {
+        // AppDbContext instance to interact with the database
         private readonly AppDbContext _context;
 
+        // Constructor that initializes the repository with the AppDbContext
         public UserRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<User?> AddUserAsync(User user)
+        // Method to get a user by their ID asynchronously
+        public async Task<User> GetByIdAsync(Guid id)
         {
-            _context.Users.Add(user);
+            // Find and return the user with the given ID
+            return await _context.Users.FindAsync(id);
+        }
+
+        // Method to get a user by their username or email asynchronously
+        public async Task<User> GetByUsernameOrEmailAsync(string usernameOrEmail)
+        {
+            // Return the first user found where the username or email matches the input
+            return await _context.Users.FirstOrDefaultAsync(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
+        }
+
+        // Method to add a new user to the database asynchronously
+        public async Task AddAsync(User user)
+        {
+            // Add the user to the Users DbSet
+            await _context.Users.AddAsync(user);
+            // Save changes to the database
             await _context.SaveChangesAsync();
-            return user;
-        }
-
-        public async Task<User?> GetUserByEmailAsync(string email)
-        {
-            return await _context.Users.FirstOrDefaultAsync(i => i.Email == email);
-        }
-
-        public async Task<User?> GetUserByIdAsync(Guid Id)
-        {
-            return await _context.Users.FindAsync(Id);
         }
     }
 }

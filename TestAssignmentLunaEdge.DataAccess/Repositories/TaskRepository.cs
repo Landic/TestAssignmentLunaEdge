@@ -9,48 +9,58 @@ using TestAssignmentLunaEdge.DataAccess.Models;
 
 namespace TestAssignmentLunaEdge.DataAccess.Repositories
 {
+    // The TaskRepository class implements ITaskRepository interface
     public class TaskRepository : ITaskRepository
     {
+        // AppDbContext instance to interact with the database
         private readonly AppDbContext _context;
 
+        // Constructor that initializes the repository with the AppDbContext
         public TaskRepository(AppDbContext context)
         {
             _context = context;
         }
 
+        // Method to get a task by its ID asynchronously
+        public async Task<TaskModel> GetByIdAsync(Guid id) =>
+            // Find and return the task with the given ID
+            await _context.Tasks.FindAsync(id);
 
+        // Method to get all tasks assigned to a user by their ID asynchronously
+        public async Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(Guid userId) =>
+            // Return a list of tasks where the UserID matches the provided userId
+            await _context.Tasks.Where(t => t.UserID == userId).ToListAsync();
 
-        public async Task<TaskModel?> AddTaskAsync(TaskModel task)
+        // Method to add a new task to the database asynchronously
+        public async Task AddAsync(TaskModel task)
         {
-            _context.Tasks.Add(task);
+            // Add the task to the Tasks DbSet
+            await _context.Tasks.AddAsync(task);
+            // Save changes to the database
             await _context.SaveChangesAsync();
-            return task;
         }
 
-        public async Task DeleteTaskAsync(Guid id)
+        // Method to update an existing task in the database asynchronously
+        public async Task UpdateAsync(TaskModel task)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            // Update the task in the Tasks DbSet
+            _context.Tasks.Update(task);
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+        }
+
+        // Method to delete a task by its ID asynchronously
+        public async Task DeleteAsync(Guid id)
+        {
+            // Get the task by its ID
+            var task = await GetByIdAsync(id);
+            // If the task exists, remove it from the database
             if (task != null)
             {
                 _context.Tasks.Remove(task);
+                // Save changes to the database
                 await _context.SaveChangesAsync();
             }
-        }
-
-        public async Task<TaskModel?> GetTaskByIdAsync(Guid id)
-        {
-            return await _context.Tasks.FindAsync(id);
-        }
-
-        public async Task<IEnumerable<TaskModel>> GetTasksByUserIdAsync(Guid userId)
-        {
-            return await _context.Tasks.Where(i => i.UserID == userId).ToListAsync();
-        }
-
-        public async Task UpdateTaskAsync(TaskModel task)
-        {
-            _context.Tasks.Update(task);
-            await _context.SaveChangesAsync();
         }
     }
 }
