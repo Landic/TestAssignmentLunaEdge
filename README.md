@@ -10,7 +10,7 @@ Follow the steps below to run this project locally.
 
 Before you begin, ensure you have the following tools installed:
 
-- .NET 6.0 or higher
+- .NET 8.0
 - MySQL or MariaDB server
 - A tool like Postman or Insomnia to test API endpoints
 
@@ -18,7 +18,7 @@ Before you begin, ensure you have the following tools installed:
 
 Start by cloning the repository to your local machine:
 
-git clone [https://github.com/yourusername/your-repository-name.git](https://github.com/Landic/TestAssignmentLunaEdge.git)
+git clone [https://github.com/Landic/TestAssignmentLunaEdge.git]
 cd your-repository-name
 
 ### 2. Set Up the Database
